@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600;700&display=swap');
     *{
         margin: 0;
         padding: 0;
@@ -21,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
         background: transparent;
         color: white;
         transition: all 0.5s ease;
+        font-family: 'Dosis', sans-serif;
         &:hover {
             background-color: #23d997;
             color: white;
