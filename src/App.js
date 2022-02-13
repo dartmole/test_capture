@@ -8,27 +8,32 @@ import MovieDetail from "./pages/MovieDetail";
 //Global style
 import GlobalStyle from "./components/GlobalStyle";
 //Router
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+//Animation
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
   return (
     <div className="App">
       <GlobalStyle />
       <Nav />
-      <Routes>
-        <Route exact path="/" element={<AboutUs />} />
-        <Route exact path="/work" element={<OurWork />} />
-        <Route path="/work/:movieUrl" element={<MovieDetail />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
-            </main>
-          }
-        />
-      </Routes>
+      <AnimatePresence exitBeforeEnter>
+        <Routes location={location} key={location.pathname}>
+          <Route exact path="/" element={<AboutUs />} />
+          <Route exact path="/work" element={<OurWork />} />
+          <Route path="/work/:movieUrl" element={<MovieDetail />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 }

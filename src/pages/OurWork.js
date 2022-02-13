@@ -4,12 +4,21 @@ import styled from "styled-components";
 //Router
 import { Link, useLocation, useParams, Outlet } from "react-router-dom";
 import { MovieState } from "../MovieState";
+//Animation
+import { motion } from "framer-motion";
+import { PageAnimation } from "../animation";
 
 const OurWork = () => {
   const movies = MovieState();
 
   return (
-    <Work>
+    <Work
+      variants={PageAnimation}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      style={{ background: "#fff" }}
+    >
       {movies.map((movie) => {
         return (
           <Movie key={movie.id}>
@@ -25,7 +34,7 @@ const OurWork = () => {
   );
 };
 
-const Work = styled.div`
+const Work = styled(motion.div)`
   min-height: 100vh;
   overflow: hidden;
   padding: 5rem 10rem;

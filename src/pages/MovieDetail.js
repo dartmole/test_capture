@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { MovieState } from "../MovieState";
+//Animation
+import { motion } from "framer-motion";
+import { PageAnimation } from "../animation";
 
 const MovieDetail = () => {
   const url = useParams().movieUrl;
@@ -9,12 +12,12 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     const selectedMovie = movies.find((item) => item.url === url);
-    setMovie(selectedMovie);
+    if (selectedMovie) setMovie(selectedMovie);
   }, []);
   return (
     <>
       {movie && (
-        <Details>
+        <Details variants={PageAnimation} initial="hidden" animate="show" exit="exit">
           <Headline>
             <h2>{movie.title}</h2>
             <img src={movie.mainImg} alt={movie.title} />
@@ -47,7 +50,7 @@ const Award = ({ title, description }) => {
   );
 };
 
-const Details = styled.div`
+const Details = styled(motion.div)`
   color: white;
 `;
 
